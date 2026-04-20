@@ -1,0 +1,70 @@
+<mat-card class="chat-card">
+  <div class="chat-header">
+    <span class="chat-title">Chat</span>
+    <button mat-icon-button (click)="clearChat()" matTooltip="Clear chat">
+      <mat-icon>clear_all</mat-icon>
+    </button>
+  </div>
+
+  <div class="messages-container" #messagesContainer>
+    @if (messages.length === 0 && !isLoading) {
+      <div class="empty-state">
+        <mat-icon>chat_bubble_outline</mat-icon>
+        <p>Upload a PDF and send a message to begin</p>
+      </div>
+    }
+
+    @for (message of messages; track $index) {
+      <div class="message" [class.user]="message.role === 'user'" [class.assistant]="message.role === 'assistant'">
+        <div class="message-bubble">
+          <span class="role-label">{{ message.role === 'user' ? 'You' : 'AI' }}</span>
+          @if (message.role === 'assistant') {
+            <markdown class="message-content" [data]="message.content" />
+          } @else {
+            <div class="message-content">{{ message.content }}</div>
+          }
+        </div>
+      </div>
+    }
+
+    @if (isLoading) {
+      <div class="message assistant">
+        <div class="message-bubble loading-bubble">
+          <mat-spinner diameter="20"></mat-spinner>
+          <span class="thinking-text">Thinking...</span>
+        </div>
+      </div>
+    }
+
+    @if (errorMessage) {
+      <div class="error-message">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage }}</span>
+      </div>
+    }
+  </div>
+
+  <div class="input-section">
+    <div class="input-area">
+      <mat-form-field appearance="outline" class="input-field">
+        <mat-label>Message</mat-label>
+        <textarea
+          matInput
+          [(ngModel)]="currentInput"
+          (keydown.control.enter)="sendMessage()"
+          rows="3"
+          placeholder="Type your message... (Ctrl+Enter to send)">
+        </textarea>
+      </mat-form-field>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="sendMessage()"
+        [disabled]="isLoading || !currentInput.trim() || !config"
+        class="send-btn">
+        <mat-icon>send</mat-icon>
+        Send
+      </button>
+    </div>
+  </div>
+</mat-card>

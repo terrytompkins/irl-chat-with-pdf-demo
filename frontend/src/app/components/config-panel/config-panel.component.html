@@ -1,0 +1,35 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Configuration</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="configForm" class="config-form">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>AI API</mat-label>
+        <mat-select formControlName="apiType">
+          <mat-option value="openai">OpenAI</mat-option>
+          <mat-option value="gemini">Google Gemini</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Model</mat-label>
+        <mat-select formControlName="model">
+          @for (model of availableModels; track model.value) {
+            <mat-option [value]="model.value">{{ model.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>API Key</mat-label>
+        <input
+          matInput
+          formControlName="apiKey"
+          type="password"
+          placeholder="sk-... or AIza...">
+        <mat-hint>Optional if set in backend .env</mat-hint>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+</mat-card>

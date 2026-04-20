@@ -1,0 +1,56 @@
+=== Claude Code Session Log ===
+Project: IRL Chat with PDF Demo
+Date: 2026-04-20
+Primary Model: claude-sonnet-4-6 (1M context) via Gemini hosting
+
+--- Session Start: 2026-04-20 ---
+
+[REQUIREMENTS GATHERING]
+- User described application requirements
+- Claude Code asked 6 clarifying questions
+- User provided answers to all questions
+
+[ARCHITECTURE DECISIONS]
+- Backend: Node.js/Express (ESM modules)
+- Frontend: Angular 19 (standalone components)
+- API key: .env with UI fallback
+- Backend proxies all LLM calls (stateless)
+- File handling: multer memoryStorage, base64 for Gemini, Files API for OpenAI
+- Session: in-memory (no database), file ref stored in frontend state
+- Models: PDF-capable only (GPT-4o, GPT-4o-mini, Gemini 2.5/2.0/1.5)
+
+[CODE GENERATION - 2026-04-20]
+- Generated backend (server.js, routes/chat.js, package.json, .env.example)
+- Generated Angular 19 frontend (all components, services, config files)
+- Total files created: 28
+- Files verified: routes/chat.js, chat.component.ts, app.ts, angular.json, styles.scss, file-upload.component.ts
+
+[FILE INVENTORY]
+Backend (5 files):
+  backend/package.json, server.js, routes/chat.js, .env.example
+Frontend (23 files):
+  package.json, tsconfig.json, tsconfig.app.json, angular.json, proxy.conf.json
+  src/index.html, main.ts, styles.scss
+  src/app/models.ts, app.ts, app.config.ts, app.routes.ts
+  src/app/services/chat.service.ts
+  src/app/components/config-panel/* (3 files)
+  src/app/components/file-upload/* (3 files)
+  src/app/components/chat/* (3 files)
+
+[KEY DESIGN DECISIONS MADE DURING GENERATION]
+- OpenAI PDF: uses Files API (purpose: user_data) + file_id in chat completions content
+- Gemini PDF: inline base64 via inlineData in first message of each conversation
+- Backend stateless: file reference (fileId or base64) stored in Angular frontend state
+- Angular 19 @if/@for control flow used (not *ngIf/*ngFor)
+- Material Design theme: M2 indigo/pink via @use/@include (Angular 19 compatible)
+- Ctrl+Enter shortcut to send messages in chat
+
+[NEXT STEPS (planned)]
+- npm install in backend/ and frontend/
+- Verify app compiles and runs
+- Iterate on default prompt as user tests with actual veterinary diagnostic PDFs
+
+Note: Token counts for this Claude Code session are not programmatically accessible
+from within Claude Code itself. For token usage, check the Anthropic API dashboard
+or the Claude Code CLI output (shown after each response in some configurations).
+Timestamps above are approximate (based on session date 2026-04-20).

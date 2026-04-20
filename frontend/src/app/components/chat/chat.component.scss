@@ -1,0 +1,184 @@
+// The host element (<app-chat>) must be a constrained flex item so the card
+// inside it doesn't grow past the viewport.
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+// MDC already sets display:flex; flex-direction:column; overflow:hidden on mat-card.
+// We just need to make it fill the host and not grow past it.
+.chat-card {
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.chat-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 8px 8px 16px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.chat-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.messages-container {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #9e9e9e;
+  text-align: center;
+  padding: 32px;
+
+  mat-icon {
+    font-size: 56px;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+    opacity: 0.5;
+  }
+
+  p {
+    margin: 0;
+    font-size: 15px;
+  }
+}
+
+.message {
+  display: flex;
+
+  &.user {
+    justify-content: flex-end;
+
+    .message-bubble {
+      background-color: #3f51b5;
+      color: #fff;
+      border-radius: 16px 16px 4px 16px;
+
+      .role-label {
+        color: rgba(255, 255, 255, 0.75);
+      }
+    }
+  }
+
+  &.assistant {
+    justify-content: flex-start;
+
+    .message-bubble {
+      background-color: #f5f5f5;
+      color: #212121;
+      border-radius: 16px 16px 16px 4px;
+
+      .role-label {
+        color: #616161;
+      }
+    }
+  }
+}
+
+.message-bubble {
+  max-width: 75%;
+  padding: 10px 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+
+  .role-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .message-content {
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+
+  &.loading-bubble {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+  }
+}
+
+.thinking-text {
+  font-size: 14px;
+  color: #757575;
+  font-style: italic;
+}
+
+.error-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 14px;
+  background-color: #ffebee;
+  border-radius: 8px;
+  color: #c62828;
+  font-size: 13px;
+  border-left: 3px solid #ef5350;
+
+  mat-icon {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+}
+
+.input-section {
+  flex-shrink: 0;
+  padding: 8px 16px 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.input-area {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  width: 100%;
+}
+
+.input-field {
+  flex: 1;
+  margin-bottom: 0;
+
+  textarea {
+    resize: none;
+  }
+}
+
+.send-btn {
+  height: 48px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 4px;
+}
