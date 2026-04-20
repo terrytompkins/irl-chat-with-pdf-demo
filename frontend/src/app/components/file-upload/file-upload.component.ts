@@ -3,7 +3,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonModule } from '@angular/material/button';
-import { NgClass } from '@angular/common';
 import { ApiConfig, FileRef } from '../../models';
 import { ChatService } from '../../services/chat.service';
 
@@ -14,8 +13,7 @@ import { ChatService } from '../../services/chat.service';
     MatCardModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    MatButtonModule,
-    NgClass
+    MatButtonModule
   ],
   templateUrl: './file-upload.component.html',
   styleUrl: './file-upload.component.scss'
